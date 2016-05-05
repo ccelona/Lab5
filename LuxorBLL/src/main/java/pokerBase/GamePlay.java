@@ -14,7 +14,7 @@ public class GamePlay implements Serializable   {
 
 	private UUID GameID;
 	private LinkedList lnkPlayerOrder = new LinkedList<UUID>();	
-	private UUID PlayerID_NextToAct = null;
+	private Player PlayerID_NextToAct = null;
 	private HashMap<UUID, Player> hmGamePlayers = new HashMap<UUID, Player>();
 	private HashMap<UUID, Hand> hmGamePlayerHand = new HashMap<UUID, Hand>();
 	private ArrayList<GamePlayPlayerHand> GamePlayerHand = new ArrayList<GamePlayPlayerHand>();
@@ -35,12 +35,6 @@ public class GamePlay implements Serializable   {
 		this.setGameDealer1(GameDealer);
 		this.rle = rle;
 	}
-	//public GamePlay(Rule rle, UUID GameDealerID)
-	//{
-	//	this.setGameID(UUID.randomUUID());
-	//	this.setGameDealer(GameDealer);
-	//	this.rle = rle;
-	//}
 
 	public UUID getGameID() {
 		return GameID;
@@ -62,12 +56,6 @@ public class GamePlay implements Serializable   {
 	public void setGamePlayers(HashMap<UUID, Player> gamePlayers) {
 		this.hmGamePlayers = new HashMap<UUID, Player>(gamePlayers);
 		
-	//	Iterator it = getGamePlayers().entrySet().iterator();
-	//	while (it.hasNext()) {
-	//		Map.Entry pair = (Map.Entry) it.next();
-	//		Player p = (Player)pair.getValue();
-	//		this.addPlayerHand(p.getPlayerID());
-	//	}
 	}
 	
 	public void addPlayerToGame(Player p)
@@ -87,9 +75,6 @@ public class GamePlay implements Serializable   {
 		GameDeck = gameDeck;
 	}
 	
-	//public UUID getGameDealer() {
-	//	return GameDealer;
-	//}
 	
 	public Player getGameDealer() {
 		return GameDealer1;
@@ -117,12 +102,12 @@ public class GamePlay implements Serializable   {
 		return lnkPlayerOrder;
 	}
 
-	public UUID getPlayerID_NextToAct() {
+	public Player getPlayerID_NextToAct() {
 		return PlayerID_NextToAct;
 	}
 
-	public void setPlayerID_NextToAct(UUID playerID_NextToAct) {
-		PlayerID_NextToAct = playerID_NextToAct;
+	public void setPlayerID_NextToAct(Player player) {
+		PlayerID_NextToAct = player;
 	}
 	
 	public int[] iActOrder() {
@@ -143,7 +128,7 @@ public class GamePlay implements Serializable   {
 	
 	//
 	
-	public Player getPlayerByPosition(int i) {
+	public Player getPlayerPosition(int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -243,14 +228,14 @@ public class GamePlay implements Serializable   {
 	}
  	*/
 	
-	public Player ComputePlayerNextToAct(int iCurrentPosition) {
-		int[] iNextOrder = GetOrder(iCurrentPosition);
+	public Player PlayerNextToAct(int iCurrentPosition) {
+		int[] iNextOrder = PlayerOrder(iCurrentPosition);
 		for (int i : iNextOrder) {
-			if (getPlayerByPosition(i) != null) {
+			if (getPlayerPosition(i) != null) {
 				if (i == iCurrentPosition)
 					return null;
 				else
-					return getPlayerByPosition(i);
+					return getPlayerPosition(i);
 			}
 		}
 		
@@ -258,27 +243,27 @@ public class GamePlay implements Serializable   {
 	}
 	
 	
-	public static int[] GetOrder(int iStartPosition) {
-		int[] iPos = null;
-		switch (iStartPosition) {
+	public static int[] PlayerOrder(int StartPosition) {
+		int[] Pos = null;
+		switch (StartPosition) {
 		case 1:
-			int[] iPositions1 = new int[] {2, 3, 4, 1};
-			iPos = iPositions1;
+			int[] Positions1 = new int[] {2, 3, 4, 1};
+			Pos = Positions1;
 			break;
 		case 2:
-			int[] iPositions2 = new int[] {3, 4, 1, 2};
-			iPos = iPositions2;
+			int[] Positions2 = new int[] {3, 4, 1, 2};
+			Pos = Positions2;
 			break;
 		case 3:
-			int[] iPositions3 = new int[] {4, 1, 2, 3};
-			iPos = iPositions3;
+			int[] Positions3 = new int[] {4, 1, 2, 3};
+			Pos = Positions3;
 			break;
 		case 4: 
-			int[] iPositions4 = new int[] {1, 2, 3, 4};
-			iPos = iPositions4;
+			int[] Positions4 = new int[] {1, 2, 3, 4};
+			Pos = Positions4;
 			break;
 		}
-		return iPos;
+		return Pos;
 	}
 
 

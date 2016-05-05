@@ -251,7 +251,7 @@ public class PokerTableController {
 		Player Dealer = HubGamePlay.getGamePlayers().get(HubGamePlay.getGameDealer());
 		int[] Positions = HubGamePlay.getiActOrder();
 		for(int i:Positions){
-			if(HubGamePlay.getPlayerByPosition(i)==Dealer){
+			if(HubGamePlay.getPlayerPosition(i)==Dealer){
 				switch (i){
 				case 1:
 					imgViewDealerButtonPos1.setVisible(true);
